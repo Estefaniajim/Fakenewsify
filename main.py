@@ -10,7 +10,9 @@ def index():
   if request.method == 'POST':
     url = request.form['url']
     predict = model.predict(url)
-    return render_template('index.html', predict = predict)
+    value = predict[1]
+    clickbait = predict[2]
+    return render_template('index.html', value = value, clickbait = clickbait)
   else:
     return render_template('index.html')
 

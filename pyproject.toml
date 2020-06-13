@@ -1,0 +1,17 @@
+[tool]
+[tool.poetry]
+authors = ["Your Name <you@example.com>"]
+name = "root"
+version = "0.0.0"
+[tool.poetry.dependencies]
+flask = "==1.0.2"
+python = "^3.8"
+newspaper3k = "^0.2.8"
+pandas = "^1.0"
+sklearn = "^0.0.0"
+newsapi = "^0.1.1"
+pymongo = "^3.10"
+dash-core-components = "^1.10"
+dash-html-components = "^1.0"
+plotly = "^4.8"
+dash = "^1.12"

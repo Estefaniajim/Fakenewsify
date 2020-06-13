@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% set active_page = "feed" %}
+{% block content %}
+ <link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet"
+          media="screen,projection"/>
+<div id="container" class="container">
+  <div class="card" style="margin-top:40px;">
+    <div class="card-body">
+      {% for title in headlines %}
+            <li class="collection-item"><a href="#">{{ title }}</a></li>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

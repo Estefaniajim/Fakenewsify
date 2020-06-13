@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% set active_page = "index" %}
+{% block content %}
+
+<div id="hero" class="container" style="margin-top:30%;">
+  
+  <h1 style = "color: #272727 font-size:72;margin-bottom:2%;"> Are you reading <span style="color: #FF9900">fake news?</span></h1>
+  <p style="margin-bottom:6%;"> Enter a link to find out! </p>
+
+  <form class="input-group mb-3" id="form" method='POST' action='/' style="">
+    <input style="font-size: 25px;border-radius: 100px;border:none;height:6rem;padding-left:3pm;padding-right:50px;" type="text" class="form-control shadowBox" placeholder="Enter URL of News Article" name="url"></input>
+    <div class="input-group-append">
+
+      <input style="font-size: 25px;border-radius:100px;font-weight:bold;border:none;width:12rem;margin-left:-50px;z-index: 10;" class="btn btn-primary shadowBox" type="submit" value="SUBMIT"></input>
+
+    </div>
+  </form>
+</div>
+
+{% endblock content %}

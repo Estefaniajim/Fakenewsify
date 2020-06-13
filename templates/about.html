@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% set active_page = "about" %}
+{% block content %}
+
+<div style="width:100%;"> 
+  <svg width="100%" viewBox="0 0 1440 527" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0,-230)">
+  <defs>
+    <linearGradient id="bicolored">
+            <stop offset="57%" stop-color="white"/>
+            <stop offset="10%" stop-color="#ffae42"/>
+        </linearGradient>
+  </defs>
+  <path d="M774.496 497.267C336.519 583.714 75.6749 461.248 0 389.209V0H1440V427.73C1400.66 414.89 1212.47 410.821 774.496 497.267Z" fill="#3563DB"/>
+  <text style="font-weight:bold;" x="15%" y="60%" fill="white" font-size ="40">Why we built FakeNewsify</text>
+  <text x="15%" y="72%" fill="url(#bicolored)" font-size = "30" style="font-weight:normal;">Our solution to Fake News</text>
+  <text x="15%" y = "112%" fill="black" font-size = "30"> We noticed a problem with Fake News </text>
+  <g>    
+  </svg> 
+</div>
+{% endblock content %}

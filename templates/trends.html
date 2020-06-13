@@ -25,6 +25,18 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
         chart.draw(data, options);
+      
+      var data2 = google.visualization.arrayToDataTable([
+        ["Type", "number"],
+        ["Clickbait", {{num_clickbait}}],
+        ["Not Clickbait", {{num_notclickbait}}]
+      ]);
+      var options2 = {
+        title: "Clickbait or not"
+      };
+      var chart = new google.visualization.PieChart
+      (document.getElementById("piechart"));
+      chart.draw(data2,option2);
       }
     </script>
     <script type="text/javascript">

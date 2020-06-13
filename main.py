@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 import model
 from model import get_headlines
-from model import predict
 from plotly.offline import iplot
 import random
 from time import sleep
@@ -18,7 +17,13 @@ def about():
 
 @app.route('/feed')
 def feed():
-  return render_template('feed.html', headlines = get_headlines())
+  str1 = ""
+  headlines = get_headlines()
+  url = headlines[0]
+  url = url[0]
+  for letter in url:
+    str1 += letter
+  return render_template('feed.html', headlines = headlines, predict = model.predict(str1))
 
 @app.route('/trends')
 def trends():

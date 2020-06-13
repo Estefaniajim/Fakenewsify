@@ -173,6 +173,12 @@ input:checked+ .slider .on
 input:checked + .slider .off
 {display: none;}
 
+#wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+}
+
 /*--------- END --------*/
 
 /* Rounded sliders */
@@ -221,3 +227,5 @@ input:checked + .slider .off
 .container {
   padding: 2px 16px;
 }
+
+.container>div{display: inline-block;}

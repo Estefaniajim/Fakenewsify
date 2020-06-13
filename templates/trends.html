@@ -13,8 +13,8 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Type', 'number'],
-          ['Fake',  {num_fake}],
-          ['Real',  {num_real}]
+          ['Fake',  {{num_fake}}],
+          ['Real',  {{num_real}}]
           
         ]);
 
@@ -27,9 +27,32 @@
         chart.draw(data, options);
       }
     </script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Type', 'number'],
+          ['Clickbait',  {{num_clickbait}}],
+          ['Not Clickbait',  {{num_notclickbait}}]
+          
+        ]);
+
+        var options = {
+          title: 'Clickbait or Not Clickbait'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+        chart.draw(data, options);
+      }
+    </script>
   </head>
   <body>
     <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="piechart2" style="width: 900px; height: 500px;"></div>
   </body>
 </html>
 

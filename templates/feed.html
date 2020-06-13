@@ -3,22 +3,24 @@
 {% block content %}
  <link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet"
           media="screen,projection"/>
-<div id="container" class="container">
-  
+<div id="container" class="container" style="padding-top:2%;">
   {% for title in headlines %}
-  <div class="card">
+  <div class="card" style="padding-top:15px;padding-left:15px;padding-bottom:15px;padding-right:15px;margin-bottom:1%;">
     <div class="container">
       <div>
-        <h4><b>{{ title[1] }}</b></h4> 
-        <h4><b><a href="{{ title[0] }}">{{ title[0] }}</a></b></h4>
-      </div>
-      <div class="pic">
-        <img src={{ title[4] }} alt="News Image" width="300px" height="200px">
+        <div class="pic" style="">
+          <img src={{ title[4] }} alt="News Image" width="300px" height="200px">
+        </div>
+        <h2><b>{{ title[1] }}</b></h2> 
+        <h5><a href="{{ title[0] }}">{{ title[0] }}</a></h5>
+        <h2><b>{{title[6]}}</b></h2>
+        <h2><b>{{ title[7] }}</b></h2>  
       </div>
     </div>
   </div>
   {% endfor %}
-  
+
+
 </div>
 
 {% endblock content %}

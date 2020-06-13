@@ -1,11 +1,11 @@
 from newspaper import Article
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import accuracy_score
-import numpy as np
-import itertools
-from sklearn.linear_model import PassiveAggressiveClassifier
+# from sklearn.model_selection import train_test_split
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.metrics import accuracy_score
+# import numpy as np
+# import itertools
+# from sklearn.linear_model import PassiveAggressiveClassifier
 import pickle
 from newsapi import NewsApiClient
 from pymongo import MongoClient
@@ -19,9 +19,7 @@ tfidf_vectorizer = pickle.load(open("vectorizer.pickle", "rb"))
 
 client = MongoClient("mongodb+srv://test:test@cluster0-fyszh.mongodb.net/<dbname>?retryWrites=true&w=majority")
 db = client.test
-
 db = client.get_database("news_data")
-
 k = db.fake_or_real
 
 
@@ -53,15 +51,32 @@ def predict(url):
 	#article.nlp()
 	return [str(article.title), predict_fake(str(article.title), str(article.text)), compare(article.title.split(), article.keywords), str(article.summary)] 
 
+def sum(url):
+  str1 = ""
+  for letters in url:
+    str1 += letters
+  return str1
 
 def get_headlines():
-	final = []
-	top_headlines = newsapi.get_top_headlines(language='en')
-	
-	for i in top_headlines['articles']:
-		final.append([i['url'], i['title'], i['description'], i['source']['name'], i['urlToImage']])
+  final = []
+  top_headlines = newsapi.get_top_headlines(language='en')
+  for i in top_headlines['articles']:
+    url = sum(i['url'])
+    data = predict(url)
+    value = data[1]
+    clickbait = data[2]
+    arr = [
+          i['url'],
+          i['title'],
+          i['description'],
+          i['source']['name'],
+          i['urlToImage'],
+          value,
+          clickbait]
+    final.append(arr)
+    
+  return final
 
-	return final
 
 def update(x):
 	if x == "REAL":

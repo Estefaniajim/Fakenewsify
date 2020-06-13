@@ -118,8 +118,21 @@ input:checked + .slider:before {
 }
 
 /*------ ADDED CSS ---------*/
+
+footer {
+  text-align: center;
+  clear: both;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #3563DB;
+  color: white;
+}
+
 .pic {
   float:right;
+  right:0;
 }
 
 @media (min-device-width:600px) {

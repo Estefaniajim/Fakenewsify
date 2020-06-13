@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import model
 from model import get_headlines
+from model import predict
 from plotly.offline import iplot
 import random
 from time import sleep
@@ -22,6 +23,6 @@ def feed():
 @app.route('/trends')
 def trends():
   return render_template('trends.html', num_fake = model.get_data("FAKE"), num_real = model.get_data("REAL"), num_clickbait = model.get_data("CLICKBAIT"), num_notclickbait = model.get_data("NOT CLICKBAIT"))
-  
+ 
 
 app.run(host='0.0.0.0', port=8080, debug=True)

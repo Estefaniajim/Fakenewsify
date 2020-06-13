@@ -4,23 +4,21 @@
  <link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet"
           media="screen,projection"/>
 <div id="container" class="container">
-  <!--<div class="card" style="margin-top:40px;">
-    <div class="card-body">
-      {% for title in headlines %}
-            <li class="collection-item">{{ title }}</a></li>
-        {% endfor %}
-    </div>
-  </div>-->
   
   {% for title in headlines %}
   <div class="card">
-    <div class="container" >
-      <h4><b>{{ title[1] }}</b></h4> 
-      <h4><b><a href="{{ title[0] }}">{{ title[0] }}</a></b></h4>
+    <div class="container">
+      <div>
+        <h4><b>{{ title[1] }}</b></h4> 
+        <h4><b><a href="{{ title[0] }}">{{ title[0] }}</a></b></h4>
       </div>
-      <img src={{ title[4] }} alt="News Image" width="300" height="200" style="float:right">
+      <div class="pic">
+        <img src={{ title[4] }} alt="News Image" width="300px" height="200px">
+      </div>
+    </div>
   </div>
   {% endfor %}
+  
 </div>
 
 {% endblock content %}

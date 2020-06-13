@@ -118,6 +118,9 @@ input:checked + .slider:before {
 }
 
 /*------ ADDED CSS ---------*/
+.pic {
+  float:right;
+}
 
 @media (min-device-width:600px) {
     img[data-src-600px] {
@@ -173,12 +176,6 @@ input:checked+ .slider .on
 input:checked + .slider .off
 {display: none;}
 
-#wrapper {
-    margin-left:auto;
-    margin-right:auto;
-    width:960px;
-}
-
 /*--------- END --------*/
 
 /* Rounded sliders */
@@ -189,7 +186,7 @@ input:checked + .slider .off
 
 .slider.round:before {
   border-radius: 50%;
-  }
+}
 
 .dark-mode {
   background-color: #2A2A2A;
@@ -228,4 +225,10 @@ input:checked + .slider .off
   padding: 2px 16px;
 }
 
-.container>div{display: inline-block;}
+.container> div{display: inline-block;}
+
+/*@media only screen and (min-device-width: 360px) and (max-device-width: 640px){
+#form{
+
+}
+}*/

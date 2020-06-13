@@ -1,15 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import model
 from model import get_headlines
 from plotly.offline import iplot
-import random
-from time import sleep
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-	return render_template('index.html')
+  if request.method == 'POST':
+    url = request.form['url']
+    predict = model.predict(url)
+    return render_template('index.html', predict = predict)
+  else:
+    return render_template('index.html')
 
 @app.route('/about')
 def about():

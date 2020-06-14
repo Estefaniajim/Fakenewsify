@@ -23,7 +23,6 @@ db = client.get_database("news_data")
 k = db.fake_or_real
 
 
-
 def predict_fake(title, text):
 	data = {"Unnamed: 0": ["0000"], "title":[title], "text":[text], "label":["FAKE/REAL"]}
 	frame = pd.DataFrame(data, columns = ["Unnamed: 0", "title", "text", "label"])
@@ -74,7 +73,7 @@ def get_headlines():
           value,
           clickbait]
     final.append(arr)
-    
+
   return final
 
 

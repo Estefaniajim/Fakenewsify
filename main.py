@@ -11,6 +11,7 @@ def index():
     predict = model.predict(url)
     value = predict[1]
     clickbait = predict[2]
+    # final_evaluation = "That "
     return render_template('index.html', 
                           value = value, 
                           clickbait = clickbait)

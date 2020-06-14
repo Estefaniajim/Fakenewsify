@@ -4,8 +4,6 @@
 <!DOCTYPE html>
 <html>
   <head style = "background-color: #EDF2F7">
-     <link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet"
-          media="screen,projection"/>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -13,20 +11,19 @@
 
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
+        var data1 = google.visualization.arrayToDataTable([
           ['Type', 'number'],
           ['Fake',  {{num_fake}}],
           ['Real',  {{num_real}}]
           
         ]);
 
-        var options = {
+        var options1 = {
           title: 'Fake or Real'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
+          chart.draw(data1, options1);
       }
     </script>
     <script type="text/javascript">
@@ -35,26 +32,60 @@
 
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
+        var data2 = google.visualization.arrayToDataTable([
           ['Type', 'number'],
           ['Clickbait',  {{num_clickbait}}],
           ['Not Clickbait',  {{num_notclickbait}}]
           
         ]);
 
-        var options = {
+        var options2 = {
           title: 'Clickbait or Not Clickbait'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
 
-        chart.draw(data, options);
+        chart.draw(data2, options2);
       }
     </script>
+    <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data3 = google.visualization.arrayToDataTable([
+        ["Type", "num", { role: "style" } ],
+        ["Fake", {{num_fake}}, "#b87333"],
+        ["Not Fake", {{num_real}}, "silver"],
+      ]);
+
+      var view3 = new google.visualization.DataView(data3);
+      view3.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options3 = {
+        title: "Real or not",
+        width: 450,
+        height: 250,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      chart.draw(view3, options3);
+  }
+  </script>
+   <link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet"
+          media="screen,projection"/>
   </head>
   <body>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-    <div id="piechart2" style="width: 900px; height: 500px;"></div>
+    <div id="container" class="container" style="padding-top:2%;">
+      <div id="piechart" style="width: 450px; height: 250px;"></div>
+      <div id="piechart2" style="width: 450px; height: 250px;"></div>
+      <div id="barchart_values" style="width: 900px; height: 300px;">
+    </div>
   </body>
 </html>
 

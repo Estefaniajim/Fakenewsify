@@ -1,8 +1,9 @@
 html, body {
-  /* height: 100%; */
+  height: 100%;
   overflow-x: hidden;
   font-size:100%;
-  padding: 0%;
+  padding:0%;
+  position: relative;
 }
 
 *:focus{
@@ -57,10 +58,10 @@ nav {
   font-size: 24pt;
   margin-bottom: 60px;
 }
-
+/* 
 .btn {
   background-color: #3563DB!important;
-}
+} */
 
 #hero form {
   margin-bottom: 60px;
@@ -118,6 +119,14 @@ input:checked + .slider:before {
 
 /*------ ADDED CSS ---------*/
 
+* {
+ box-sizing: border-box;
+}
+
+*:before, *:after {
+ box-sizing: border-box;
+}
+
 footer {
   text-align: center;
   clear: both;
@@ -125,6 +134,8 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 50px;
+  margin-top: -50px;
   background-color: #3563DB;
   color: white;
 }
@@ -187,6 +198,14 @@ input:checked+ .slider .on
 
 input:checked + .slider .off
 {display: none;}
+
+.page-container {
+ min-height: 100vh; /* will cover the 100% of viewport */
+ overflow: hidden;
+ display: block;
+ position: relative;
+ padding-bottom: 50px;
+}
 
 /*--------- END --------*/
 

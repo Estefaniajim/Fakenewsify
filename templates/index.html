@@ -1,27 +1,42 @@
 {% extends "base.html" %}
 {% set active_page = "index" %}
 {% block content %}
-<link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet"
-          media="screen,projection"/>
+<link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
 <div class="resized" style="text-align:center;">
-<div id="hero" class="container" style=" width: 1000px; height:500px; margin-top:8%; display: inline-block;">
+ <div id="hero" class="container" style=" width: 1000px; height:500px; margin-top:8%; display: inline-block;">
   <h1 style = "color: #272727 font-size:72;margin-bottom:2%;"> Are you reading <span style="color: #FF9900">fake news?</span></h1>
-  <p style="margin-bottom:6%;"> Enter a link to find out! </p>
-
+  <p style="margin-bottom:6%;">Enter a link to find out! </p>
   <form class="input-group mb-3" id="form" method='POST' action='/' style="">
-    <input style="font-size: 25px;border-radius: 100px;border:none;height:6rem;" type="text" class="form-control shadowBox" placeholder="Enter URL of News Article" type = "text" name="url" value="{{request.form.url}}" ></input>
+    <input style="font-size: 25px;border-radius: 100px;border:none;height:6rem;padding-left:40px;" type="text" class="form-control shadowBox" placeholder="Enter URL of News Article" type = "text" name="url" value="{{request.form.url}}" ></input>
     <div class="input-group-append">
-
-      <input style="font-size: 25px;border-radius:100px;font-weight:bold;border:none;width:12rem;margin-left:-100px;z-index: 10;" class="btn btn-primary shadowBox" type="submit" value="SUBMIT"></input>
+      <input style="font-size: 25px;border-radius:100px;font-weight:bold;border:none;width:12rem;margin-left:-100px;z-index: 10;background-color: #3563DB" class="btn btn-primary shadowBox" type="submit" value="SUBMIT"></input>
     </div>
   </form>
   <div id="container" class="container">
     <div class="container">
-        <h4><b>That article is {{value}} and {{clickbait}}</b></h4> 
+      <div style="display:inline;">
+        {% if value == 'FAKE' %}
+          <button style="border-radius:40px;margin-bottom:15px;" type="button" class="btn btn-danger"><b>{{value}}</b></button>
+        {% elif value == 'REAL' %}
+          <button style="border-radius:40px;margin-bottom:15px;" type="button" class="btn btn-success"><b>{{value}}</b></button>
+        {% else %}
+          <button style="border-radius:40px;margin-bottom:25px;" type="button" class="btn btn-warning"><b>{{value}}</b></button>
+        {% endif %}
+        {% if clickbait == 'NOT CLICKBAIT' %}
+          <button style="border-radius:40px;margin-bottom:15px;" type="button" class="btn btn-success"><b>{{clickbait}}</b></button>
+        {% elif clickbait == 'CLICKBAIT' %}
+          <button style="border-radius:40px;margin-bottom:15px;" type="button" class="btn btn-danger"><b>{{clickbait}}</b></button>
+        {% else %}
+          <button style="border-radius:40px;margin-bottom:25px;" type="button" class="btn btn-warning"><b>{{clickbait}}</b></button>
+        {% endif %}
+      </div>
+      {% if value == 'INVALID' or clickbait == 'INVALID' %}
+        <h6 style="font-size:20px;text-align:center;"><b>Invalid: Check your URL again!</b></h6>
+      {% else %}
+        <h6 style="font-size:20px;text-align:left;"><b>Title: </b>{{ article_title }}</h6>
+        <h6 style="font-size:20px;text-align:left;"><b>Summary: </b>{{text}}</h6> 
+      {% endif %}
     </div>
+  </div>
 </div>
-</div>
-
-
-
 {% endblock content %}

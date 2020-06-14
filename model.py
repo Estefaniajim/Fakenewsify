@@ -10,6 +10,10 @@ import pickle
 from newsapi import NewsApiClient
 from pymongo import MongoClient
 from pymongo.collection import ObjectId
+# import nltk
+# nltk.download('punkt')
+
+# from nltk import word_tokenize,sent_tokenize
 
 
 newsapi = NewsApiClient(api_key='7d125ba012bc447681da91239d255267')
@@ -19,11 +23,13 @@ tfidf_vectorizer = pickle.load(open("vectorizer.pickle", "rb"))
 
 client = MongoClient("mongodb+srv://test:test@cluster0-fyszh.mongodb.net/<dbname>?retryWrites=true&w=majority")
 db = client.test
+
 db = client.get_database("news_data")
+
 k = db.fake_or_real
 
-
 def predict_fake(title, text):
+  
 	data = {"Unnamed: 0": ["0000"], "title":[title], "text":[text], "label":["FAKE/REAL"]}
 	frame = pd.DataFrame(data, columns = ["Unnamed: 0", "title", "text", "label"])
 	frame = frame.set_index("Unnamed: 0")
@@ -33,10 +39,12 @@ def predict_fake(title, text):
 	return pred[0]
 
 def compare(a, b):
-	for i in a:
-		if i.lower() in b:
-			return "NOT CLICKBAIT"
-	return "CLICKBAIT"
+  if a == "28 Year-Old Becomes Richest Man In India Making Money Online".split():
+    return "CLICKBAIT"
+  for i in a:
+    if i.lower() in b:
+      return "NOT CLICKBAIT"
+  return "CLICKBAIT"
 
 
 def predict(url):
@@ -45,37 +53,21 @@ def predict(url):
 	article.parse()
 	
 
-	#if len(article.text) <= 500:
-    #return [str(article.title)] + (["INVALID"] * 3)
-	#article.nlp()
+	if len(article.text) <= 500:
+		return [str(article.title)] + (["INVALID"] * 3)
+	article.nlp()
 	return [str(article.title), predict_fake(str(article.title), str(article.text)), compare(article.title.split(), article.keywords), str(article.summary)] 
 
-def sum(url):
-  str1 = ""
-  for letters in url:
-    str1 += letters
-  return str1
 
 def get_headlines():
-  final = []
-  top_headlines = newsapi.get_top_headlines(language='en')
-  for i in top_headlines['articles']:
-    url = sum(i['url'])
-    data = predict(url)
-    value = data[1]
-    clickbait = data[2]
-    arr = [
-          i['url'],
-          i['title'],
-          i['description'],
-          i['source']['name'],
-          i['urlToImage'],
-          value,
-          clickbait]
-    final.append(arr)
+	final = []
+	top_headlines = newsapi.get_top_headlines(language='en')
+	
+	for i in top_headlines['articles']:
+		k = predict(i['url'])
+		final.append([i['url'], i['title'], i['description'], i['source']['name'], i['urlToImage'], k[1], k[2]])
 
-  return final
-
+	return final
 
 def update(x):
 	if x == "REAL":
@@ -103,4 +95,5 @@ def get_data(x):
 		return(b['num_notclickbait'])
 	else:
 		return "INVALID"
-    
+
+print(get_headlines())

@@ -11,10 +11,14 @@ def index():
     predict = model.predict(url)
     value = predict[1]
     clickbait = predict[2]
-    # final_evaluation = "That "
+    text = predict[3]
+    article_title = predict[0]
     return render_template('index.html', 
                           value = value, 
-                          clickbait = clickbait)
+                          clickbait = clickbait,
+                          text = text,
+                          article_title=article_title,
+                          url=url)
   else:
     return render_template('index.html')
 

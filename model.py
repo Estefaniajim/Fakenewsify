@@ -47,18 +47,24 @@ def compare(a, b):
 
 
 def predict(url):
-  article = Article(url)
-  article.download()
-  article.parse()
   kk = ""
-  if compare(article.title.split(), article.keywords) == "NOT CLICKBAIT" and is_clickbait(article.title) == 0:
-    kk = "NOT CLICKBAIT"
-  else:
-    kk = "CLICKBAIT"
-  if len(article.text) <= 500:
-    return [str(article.title)] + (["INVALID"] * 3)
-  article.nlp()
-  return [str(article.title), predict_fake(str(article.title), str(article.text)), kk, str(article.summary)] 
+  try:
+    article = Article(url)
+    article.download()
+    article.parse()
+    
+    if compare(article.title.split(), article.keywords) == "NOT CLICKBAIT" and is_clickbait(article.title) == 0:
+      kk = "NOT CLICKBAIT"
+    else:
+      kk = "CLICKBAIT"
+    if len(article.text) <= 500:
+      return [str(article.title)] + (["INVALID"] * 3)
+    article.nlp()
+    return [str(article.title), predict_fake(str(article.title), str(article.text)), kk, str(article.summary)] 
+  except ValueError:
+    return (["INVALID"] * 4)
+  finally:
+    return [str(article.title), predict_fake(str(article.title), str(article.text)), kk, str(article.summary)] 
 
 
 def get_headlines():

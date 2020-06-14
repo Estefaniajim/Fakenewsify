@@ -14,7 +14,7 @@ from pymongo.collection import ObjectId
 # nltk.download('punkt')
 
 # from nltk import word_tokenize,sent_tokenize
-
+from clickbait import is_clickbait
 
 newsapi = NewsApiClient(api_key='7d125ba012bc447681da91239d255267')
 linear_clf = pickle.load(open("model.pickle", "rb"))
@@ -39,8 +39,7 @@ def predict_fake(title, text):
 	return pred[0]
 
 def compare(a, b):
-  if a == "28 Year-Old Becomes Richest Man In India Making Money Online".split():
-    return "CLICKBAIT"
+  
   for i in a:
     if i.lower() in b:
       return "NOT CLICKBAIT"
@@ -48,15 +47,18 @@ def compare(a, b):
 
 
 def predict(url):
-	article = Article(url)
-	article.download()
-	article.parse()
-	
-
-	if len(article.text) <= 500:
-		return [str(article.title)] + (["INVALID"] * 3)
-	article.nlp()
-	return [str(article.title), predict_fake(str(article.title), str(article.text)), compare(article.title.split(), article.keywords), str(article.summary)] 
+  article = Article(url)
+  article.download()
+  article.parse()
+  kk = ""
+  if compare(article.title.split(), article.keywords) == "NOT CLICKBAIT" and is_clickbait(article.title) == 0:
+    kk = "NOT CLICKBAIT"
+  else:
+    kk = "CLICKBAIT"
+  if len(article.text) <= 500:
+    return [str(article.title)] + (["INVALID"] * 3)
+  article.nlp()
+  return [str(article.title), predict_fake(str(article.title), str(article.text)), kk, str(article.summary)] 
 
 
 def get_headlines():

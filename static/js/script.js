@@ -4,8 +4,9 @@ function myFunction() {
 
   (document.getElementsByClassName("form-control")[0]).classList.toggle("dark-mode-input");
 
-}
+  document.getElementsByClassName("card").classList.toggle("dark-card");
 
+}
 
 $(document).ready(function () {
         		

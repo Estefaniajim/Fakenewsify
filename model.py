@@ -95,5 +95,3 @@ def get_data(x):
 		return(b['num_notclickbait'])
 	else:
 		return "INVALID"
-
-print(get_headlines())

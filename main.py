@@ -13,6 +13,8 @@ def index():
     clickbait = predict[2]
     text = predict[3]
     article_title = predict[0]
+    model.update(value)
+    model.update(clickbait)
     return render_template('index.html', 
                           value = value, 
                           clickbait = clickbait,
